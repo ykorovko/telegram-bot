@@ -15,9 +15,11 @@ bot.start(ctx => {
 bot.help(async (ctx) => {
   console.log("Received /help command")
 
-  await ctx.reply('Send /start to receive a greeting')
-  await ctx.reply('Send /authcode to get an auth code')
-  await ctx.reply('Send /quit to stop the bot')
+  return Promise.all([
+    ctx.reply('Send /start to receive a greeting')
+    ctx.reply('Send /authcode to get an auth code')
+    ctx.reply('Send /quit to stop the bot')
+  ]);
 });
 
 const authCode = 'test'
@@ -33,11 +35,6 @@ bot.command('quit', async (ctx) => {
 
 // Context shortcut
   await ctx.leaveChat()
-});
-
-bot.on('text', async (ctx) => {
-  // Using context shortcut
-  await ctx.reply(`Hello ${ctx.state.role}`);
 });
 
 bot.launch();
