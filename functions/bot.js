@@ -15,11 +15,7 @@ bot.start(ctx => {
 bot.help(async (ctx) => {
   console.log("Received /help command")
 
-  return Promise.all([
-    ctx.reply('Send /start to receive a greeting')
-    ctx.reply('Send /authcode to get an auth code')
-    ctx.reply('Send /quit to stop the bot')
-  ]);
+  return ctx.reply('Send /authcode to receive a code')
 });
 
 const authCode = 'test'
