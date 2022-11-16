@@ -29,8 +29,12 @@ bot.command('authcode', (ctx) => {
 bot.command('quit', async (ctx) => {
   console.log("Received /quit command")
 
-// Context shortcut
-  await ctx.leaveChat()
+  try {
+    await ctx.leaveChat()
+  } catch(e) {
+    console.error("error in quit action:", e)
+    return ctx.reply("Error occured")
+  }
 });
 
 // Graceful end of the process
