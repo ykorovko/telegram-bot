@@ -10,16 +10,14 @@ bot.start(ctx => {
     console.error("error in start action:", e)
     return ctx.reply("Error occured")
   }
-})
+});
 
-bot.help((ctx) => {
+bot.help(async (ctx) => {
   console.log("Received /help command")
 
-  return [
-    ctx.reply('Send /start to receive a greeting')
-    ctx.reply('Send /authcode to get an auth code')
-    ctx.reply('Send /quit to stop the bot')
-  ]
+  await ctx.reply('Send /start to receive a greeting')
+  await ctx.reply('Send /authcode to get an auth code')
+  await ctx.reply('Send /quit to stop the bot')
 });
 
 const authCode = 'test'
@@ -30,14 +28,23 @@ bot.command('authcode', (ctx) => {
   return ctx.reply(authCode)
 });
 
-bot.command('quit', (ctx) => {
+bot.command('quit', async (ctx) => {
   console.log("Received /quit command")
 
-  // Explicit usage
-  ctx.telegram.leaveChat(ctx.message.chat.id)
 // Context shortcut
-  ctx.leaveChat()
-})
+  await ctx.leaveChat()
+});
+
+bot.on('text', async (ctx) => {
+  // Using context shortcut
+  await ctx.reply(`Hello ${ctx.state.role}`);
+});
+
+bot.launch();
+
+// Graceful end of the process
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async event => {
