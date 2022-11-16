@@ -39,13 +39,6 @@ bot.command('quit', async (ctx) => {
 
 bot.on('text', (ctx) => ctx.reply('👍'))
 
-bot.launch({
-  webhook: {
-    domain: "jarvis-telegram-bot.netlify.app",
-    port: 443,
-  }
-});
-
 // Graceful end of the process
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
