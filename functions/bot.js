@@ -41,7 +41,8 @@ bot.on('text', (ctx) => ctx.reply('👍'))
 
 bot.launch({
   webhook: {
-    domain: "jarvis-telegram-bot.netlify.app"
+    domain: "jarvis-telegram-bot.netlify.app",
+    port: 443,
   }
 });
 
