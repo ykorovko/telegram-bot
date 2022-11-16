@@ -13,16 +13,26 @@ bot.start(ctx => {
 })
 
 bot.help((ctx) => {
-  ctx.reply('Send /start to receive a greeting')
-  ctx.reply('Send /authcode to get an auth code')
-  ctx.reply('Send /quit to stop the bot')
+  console.log("Received /help command")
+
+  return [
+    ctx.reply('Send /start to receive a greeting')
+    ctx.reply('Send /authcode to get an auth code')
+    ctx.reply('Send /quit to stop the bot')
+  ]
 });
 
 const authCode = 'test'
 
-bot.command('authcode', (ctx) => ctx.reply(authCode));
+bot.command('authcode', (ctx) => {
+  console.log("Received /authcode command")
+
+  return ctx.reply(authCode)
+});
 
 bot.command('quit', (ctx) => {
+  console.log("Received /quit command")
+
   // Explicit usage
   ctx.telegram.leaveChat(ctx.message.chat.id)
 // Context shortcut
