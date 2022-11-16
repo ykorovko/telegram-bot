@@ -37,6 +37,8 @@ bot.command('quit', async (ctx) => {
   }
 });
 
+bot.on('text', (ctx) => ctx.reply('👍'))
+
 // Graceful end of the process
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
