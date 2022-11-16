@@ -32,6 +32,7 @@ bot.command('quit', (ctx) => {
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async event => {
   try {
+    console.log("Received an update from Telegram!", event.body)
     await bot.handleUpdate(JSON.parse(event.body))
     return { statusCode: 200, body: "" }
   } catch (e) {
